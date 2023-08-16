@@ -1,0 +1,98 @@
+namespace: auction-system
+auction-system:
+  defines: runnable
+  metadata:
+    name: auction-system
+    description: Auction system app to manage auctions.
+    icon: https://emojiapi.dev/api/v1/hammer.svg
+  containers:
+    auction-system:
+      build: .
+  services:
+    http:
+      container: auction-system
+      port: <- $port
+      host-port: <- $port
+      publish: false
+      protocol: TCP
+      description: HTTP port for accessing the web application
+  connections:
+    database:
+      target: aerospike/aerospike
+      service: base-svc
+  variables:
+    port:
+      env: PORT
+      type: string
+      description: HTTP port for accessing the web application
+      value: '3000'
+    host:
+      env: HOST
+      type: string
+      description: Server host
+      value: '!!!SETME!!!'
+    node-env:
+      env: NODE_ENV
+      type: string
+      description: Environment in which the application is running
+      value: '!!!SETME!!!'
+    db-name:
+      env: DB_NAME
+      type: string
+      description: Database name
+      value: '!!!SETME!!!'
+    db-user:
+      env: DB_USER
+      type: string
+      description: Database user name
+      value: '!!!SETME!!!'
+    db-password:
+      env: DB_PASSWORD
+      type: string
+      description: Database password
+      value: '!!!SETME!!!'
+    db-host:
+      env: DB_HOST
+      type: string
+      description: Database host
+      value: <- connection-hostname("database")
+    db-dialect:
+      env: DB_DIALECT
+      type: string
+      description: Database dialect
+      value: postgres
+    jwt-secret:
+      env: JWT_SECRET
+      type: string
+      description: JWT secret key
+      value: '!!!SETME!!!'
+    jwt-expires-in:
+      env: JWT_EXPIRES_IN
+      type: string
+      description: JWT expiration time
+      value: '!!!SETME!!!'
+    super-admin-email:
+      env: SUPER_ADMIN_EMAIL
+      type: string
+      description: Super admin email
+      value: '!!!SETME!!!'
+    super-admin-password:
+      env: SUPER_ADMIN_PASSWORD
+      type: string
+      description: Super admin password
+      value: '!!!SETME!!!'
+    cloudinary-cloud-name:
+      env: CLOUDINARY_CLOUD_NAME
+      type: string
+      description: Cloudinary cloud name
+      value: '!!!SETME!!!'
+    cloudinary-api-key:
+      env: CLOUDINARY_API_KEY
+      type: string
+      description: Cloudinary API key
+      value: '!!!SETME!!!'
+    cloudinay-api-secret:
+      env: CLOUDINAY_API_SECRET
+      type: string
+      description: Cloudinary API secret
+      value: '!!!SETME!!!'
